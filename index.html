@@ -201,6 +201,20 @@
       border: 1px solid rgba(79,110,247,0.2);
     }
 
+    /* ── ABOUT ── */
+    .about-para {
+      font-size: 16px;
+      color: var(--muted);
+      line-height: 1.85;
+      max-width: 680px;
+      border-left: 2px solid var(--accent);
+      padding-left: 24px;
+    }
+
+    .about-para + .about-para {
+      margin-top: 20px;
+    }
+
     /* ── EXPERIENCE ── */
     .timeline {
       position: relative;
@@ -536,6 +550,7 @@
   <nav>
     <a href="#hero" class="nav-name">RK</a>
     <ul class="nav-links">
+      <li><a href="#about">about</a></li>
       <li><a href="#experience">experience</a></li>
       <li><a href="#projects">projects</a></li>
       <li><a href="#skills">skills</a></li>
@@ -565,6 +580,20 @@
       <span class="tag">Founder's Office</span>
       <span class="tag">Data Analytics</span>
     </div>
+  </section>
+
+  <hr class="section-divider" />
+
+  <!-- ABOUT -->
+  <section id="about">
+    <p class="section-label">// about</p>
+    <h2>Who I am</h2>
+    <p class="about-para">
+      I'm an IIT Kharagpur Electrical Engineering graduate who's spent the last two years at the intersection of ground operations and structured analysis. At BPCL, I ran a 4-district lubricants territory solo — building dashboards to track what the numbers weren't showing me. At I-PAC, I turned booth-level election data into field strategy that held up on the ground. Outside of work, I built a full journaling app from scratch — because I wanted to understand what it actually takes to ship something.
+    </p>
+    <p class="about-para" style="margin-top: 20px;">
+      I'm drawn to roles where decisions are hard, data is messy, and someone needs to make sense of both.
+    </p>
   </section>
 
   <hr class="section-divider" />
@@ -740,8 +769,8 @@
       <a href="https://github.com/rishikiran1103" target="_blank" rel="noopener" class="contact-link">
         ↗ GitHub
       </a>
-      <a href="https://" target="_blank" rel="noopener" class="contact-link">
-        ↗ Gmail
+      <a href="mailto:rishikiran1103@gmail.com" class="contact-link">
+        ↗ Email
       </a>
     </div>
   </section>
@@ -751,7 +780,6 @@
   </footer>
 
   <script>
-    // Active nav highlight on scroll
     const sections = document.querySelectorAll('section[id]');
     const navLinks = document.querySelectorAll('.nav-links a');
 
