@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rishi Kiran Yenagandula</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0F1117;
+      --surface: #1E2130;
+      --surface-hover: #252840;
+      --text: #F5F5F0;
+      --muted: #6B7280;
+      --accent: #4F6EF7;
+      --accent-dim: rgba(79, 110, 247, 0.12);
+      --border: rgba(255,255,255,0.07);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      height: 60px;
+      background: rgba(15, 17, 23, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 600;
+      font-size: 15px;
+      letter-spacing: 0.02em;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      transition: color 0.2s;
+      padding-left: 10px;
+      border-left: 2px solid transparent;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--text);
+      border-left-color: var(--accent);
+    }
+
+    /* ── SECTIONS ── */
+    section {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 100px 32px;
+    }
+
+    section:first-of-type { padding-top: 140px; }
+
+    .section-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 40px;
+    }
+
+    h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 36px;
+      font-weight: 700;
+      line-height: 1.15;
+      color: var(--text);
+      margin-bottom: 48px;
+    }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-top: 80px;
+      padding-bottom: 60px;
+    }
+
+    .hero-statement {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(36px, 5vw, 58px);
+      font-weight: 700;
+      line-height: 1.1;
+      color: var(--text);
+      margin-bottom: 24px;
+      max-width: 700px;
+    }
+
+    .hero-statement .dim { color: var(--muted); }
+    .hero-statement .accent { color: var(--accent); }
+
+    .hero-name {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      margin-bottom: 20px;
+    }
+
+    .hero-sub {
+      font-size: 17px;
+      color: var(--muted);
+      max-width: 520px;
+      line-height: 1.7;
+      margin-bottom: 40px;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.2s;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .btn-primary:hover { background: #3d5ae0; }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .btn-ghost:hover {
+      background: var(--surface);
+      border-color: rgba(255,255,255,0.15);
+    }
+
+    .hero-tags {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 48px;
+    }
+
+    .tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.05em;
+      padding: 5px 12px;
+      border-radius: 4px;
+      background: var(--accent-dim);
+      color: var(--accent);
+      border: 1px solid rgba(79,110,247,0.2);
+    }
+
+    /* ── EXPERIENCE ── */
+    .timeline {
+      position: relative;
+      padding-left: 28px;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 8px; bottom: 8px;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--accent), transparent);
+    }
+
+    .exp-item {
+      position: relative;
+      margin-bottom: 48px;
+    }
+
+    .exp-item:last-child { margin-bottom: 0; }
+
+    .exp-item::before {
+      content: '';
+      position: absolute;
+      left: -34px;
+      top: 8px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 2px solid var(--bg);
+      box-shadow: 0 0 0 2px var(--accent);
+    }
+
+    .exp-meta {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 4px;
+    }
+
+    .exp-company {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 600;
+      font-size: 18px;
+    }
+
+    .exp-period {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+    }
+
+    .exp-title {
+      font-size: 13px;
+      color: var(--accent);
+      font-weight: 500;
+      margin-bottom: 12px;
+    }
+
+    .exp-bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .exp-bullets li {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.6;
+      padding-left: 16px;
+      position: relative;
+    }
+
+    .exp-bullets li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-size: 12px;
+    }
+
+    /* ── PROJECTS ── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 28px 32px;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .project-card:hover {
+      border-color: rgba(79,110,247,0.3);
+      background: var(--surface-hover);
+    }
+
+    .project-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 12px;
+    }
+
+    .project-name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .project-links {
+      display: flex;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
+    .project-link {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--accent);
+      text-decoration: none;
+      border: 1px solid rgba(79,110,247,0.3);
+      padding: 4px 10px;
+      border-radius: 4px;
+      transition: background 0.2s;
+    }
+
+    .project-link:hover { background: var(--accent-dim); }
+
+    .project-desc {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+
+    .project-stack {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .stack-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--muted);
+      padding: 3px 8px;
+      border-radius: 3px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+    }
+
+    /* ── SKILLS ── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 24px;
+    }
+
+    .skill-group h3 {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .skill-tag {
+      font-size: 13px;
+      color: var(--text);
+      padding: 5px 12px;
+      border-radius: 5px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+    }
+
+    /* ── EDUCATION ── */
+    .edu-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 28px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .edu-college {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .edu-degree {
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+
+    .edu-gpa {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--accent);
+      margin-top: 8px;
+    }
+
+    .edu-period {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    .cert-list {
+      margin-top: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .cert-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .cert-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    /* ── CONTACT ── */
+    #contact {
+      border-top: 1px solid var(--border);
+    }
+
+    .contact-intro {
+      font-size: 16px;
+      color: var(--muted);
+      max-width: 480px;
+      line-height: 1.7;
+      margin-bottom: 36px;
+    }
+
+    .contact-links {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      color: var(--text);
+      text-decoration: none;
+      padding: 10px 18px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: var(--surface);
+      transition: all 0.2s;
+    }
+
+    .contact-link:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .footer {
+      text-align: center;
+      padding: 32px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+    }
+
+    /* ── DIVIDER ── */
+    .section-divider {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 0 32px;
+      border: none;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      nav { padding: 0 20px; }
+      .nav-links { gap: 18px; }
+      section { padding: 80px 20px; }
+      .hero-statement { font-size: 32px; }
+      .edu-card { flex-direction: column; }
+      .edu-period { text-align: left; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#hero" class="nav-name">RK</a>
+    <ul class="nav-links">
+      <li><a href="#experience">experience</a></li>
+      <li><a href="#projects">projects</a></li>
+      <li><a href="#skills">skills</a></li>
+      <li><a href="#education">education</a></li>
+      <li><a href="#contact">contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <p class="hero-name">RISHI KIRAN YENAGANDULA</p>
+    <h1 class="hero-statement">
+      Built operations.<br/>
+      <span class="dim">Now building</span> <span class="accent">products.</span>
+    </h1>
+    <p class="hero-sub">
+      IIT Kharagpur graduate with hands-on experience across field marketing, political strategy, and technology consulting. I turn messy ground realities into structured decisions.
+    </p>
+    <div class="hero-cta">
+      <a href="#contact" class="btn btn-primary">Get in touch</a>
+      <a href="#experience" class="btn btn-ghost">See my work</a>
+    </div>
+    <div class="hero-tags">
+      <span class="tag">Business Analyst</span>
+      <span class="tag">Strategy & Ops</span>
+      <span class="tag">Associate PM</span>
+      <span class="tag">Founder's Office</span>
+      <span class="tag">Data Analytics</span>
+    </div>
+  </section>
+
+  <hr class="section-divider" />
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <p class="section-label">// experience</p>
+    <h2>Where I've worked</h2>
+    <div class="timeline">
+
+      <div class="exp-item">
+        <div class="exp-meta">
+          <span class="exp-company">I-PAC</span>
+          <span class="exp-period">Dec 2025 – May 2026 · Kolkata</span>
+        </div>
+        <p class="exp-title">Senior Associate — Strategy & Analytics</p>
+        <ul class="exp-bullets">
+          <li>Led booth-level data analysis across 289 booths in Murarai AC, translating ground data into actionable field strategy recommendations.</li>
+          <li>Directed 2 field personnel and coordinated with ~10 social media team members to align ground and digital execution.</li>
+          <li>Contributed to a campaign outcome resulting in a ~38,000 vote majority for the candidate.</li>
+        </ul>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-meta">
+          <span class="exp-company">BPCL</span>
+          <span class="exp-period">Jun 2024 – Jul 2025 · Salem</span>
+        </div>
+        <p class="exp-title">Assistant Executive, Marketing</p>
+        <ul class="exp-bullets">
+          <li>Managed lubricants marketing across 4 districts — 6 distributors, 150–240 retailers, 700+ SKUs, 75+ campaigns — solo.</li>
+          <li>Achieved 90% annual sales target; drove 30–40% volume improvement in underperforming zones within 6 months.</li>
+          <li>Built VBA-based KPI dashboards from scratch to track distributor performance across the territory.</li>
+        </ul>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-meta">
+          <span class="exp-company">PwC</span>
+          <span class="exp-period">May – Jul 2023 · Mumbai</span>
+        </div>
+        <p class="exp-title">Technology Consulting Intern</p>
+        <ul class="exp-bullets">
+          <li>Built Python-Selenium web scraping pipelines within a 2–3 person team, reducing manual reporting effort by 95%.</li>
+          <li>Contributed to engagements spanning 23 enterprise clients across the team's portfolio.</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <hr class="section-divider" />
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <p class="section-label">// projects</p>
+    <h2>Things I've built</h2>
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <div class="project-header">
+          <span class="project-name">Personal Journal App</span>
+          <div class="project-links">
+            <a href="https://rishikiran1103.github.io/journal-app" target="_blank" rel="noopener" class="project-link">Live ↗</a>
+            <a href="https://github.com/rishikiran1103/journal-app" target="_blank" rel="noopener" class="project-link">GitHub ↗</a>
+          </div>
+        </div>
+        <p class="project-desc">
+          A full-featured journaling app built solo — available as a single-file browser app and a Windows desktop installer (Electron). Includes a rich text editor, HTML5 Canvas drawing with stylus/pressure support and palm rejection, pinch-to-zoom, mood tagging, full-text search, and dark/light theme. ~1,600 lines across 13 dev sessions. All product decisions were mine.
+        </p>
+        <div class="project-stack">
+          <span class="stack-tag">Vanilla JS</span>
+          <span class="stack-tag">Electron v28</span>
+          <span class="stack-tag">HTML5 Canvas</span>
+          <span class="stack-tag">CSS</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <hr class="section-divider" />
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <p class="section-label">// skills</p>
+    <h2>What I work with</h2>
+    <div class="skills-grid">
+
+      <div class="skill-group">
+        <h3>Analytics & Data</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">Excel / VBA</span>
+          <span class="skill-tag">Power BI</span>
+          <span class="skill-tag">SQL</span>
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">Google Sheets</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <h3>Strategy & Ops</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">Market Analysis</span>
+          <span class="skill-tag">GTM Planning</span>
+          <span class="skill-tag">KPI Frameworks</span>
+          <span class="skill-tag">Field Operations</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <h3>Product & Dev</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">Vanilla JS</span>
+          <span class="skill-tag">Electron</span>
+          <span class="skill-tag">Google Apps Script</span>
+          <span class="skill-tag">HTML / CSS</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <h3>Tools</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">Figma</span>
+          <span class="skill-tag">Notion</span>
+          <span class="skill-tag">Jira</span>
+          <span class="skill-tag">Git / GitHub</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <hr class="section-divider" />
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <p class="section-label">// education</p>
+    <h2>Background</h2>
+
+    <div class="edu-card">
+      <div>
+        <p class="edu-college">IIT Kharagpur</p>
+        <p class="edu-degree">B.Tech — Electrical Engineering</p>
+        <p class="edu-gpa">GPA 7.41 / 10</p>
+      </div>
+      <p class="edu-period">2020 – 2024</p>
+    </div>
+
+    <div class="cert-list">
+      <div class="cert-item">
+        <span class="cert-dot"></span>
+        <span>Advanced Microsoft Excel — Udemy, Nov 2025</span>
+      </div>
+      <div class="cert-item">
+        <span class="cert-dot"></span>
+        <span>DSA AZ-201 — Algozenith, Aug 2023</span>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider" />
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <p class="section-label">// contact</p>
+    <h2>Let's talk</h2>
+    <p class="contact-intro">
+      Open to roles in business analytics, strategy & operations, product management, and founder's office across India. Best reached via LinkedIn or email.
+    </p>
+    <div class="contact-links">
+      <a href="https://linkedin.com/in/rishikiranye" target="_blank" rel="noopener" class="contact-link">
+        ↗ LinkedIn
+      </a>
+      <a href="https://github.com/rishikiran1103" target="_blank" rel="noopener" class="contact-link">
+        ↗ GitHub
+      </a>
+    </div>
+  </section>
+
+  <footer class="footer">
+    built by rishi kiran · 2026
+  </footer>
+
+  <script>
+    // Active nav highlight on scroll
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-links a');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === '#' + entry.target.id) {
+              link.classList.add('active');
+            }
+          });
+        }
+      });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+
+    sections.forEach(s => observer.observe(s));
+  </script>
+
+</body>
+</html>
