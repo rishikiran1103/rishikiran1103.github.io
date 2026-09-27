@@ -681,7 +681,7 @@
           </div>
         </div>
         <p class="project-desc">
-          An end-to-end job-search pipeline that parses job-alert emails into a Google Sheet, scores role fit with an LLM, deduplicates listings, and tracks every application's status. Audited the dashboard's funnel metrics and corrected a cumulative-stage miscount (response rate restated from 22.6% to 15.4%), then added response-rate-by-source analysis that shifted application effort toward direct channels (25.2% response direct vs. 2.1% via LinkedIn).
+          An end-to-end job-search pipeline that parses job-alert emails into a Google Sheet, scores role fit with an LLM, deduplicates listings, and tracks every application's status. Added 9 connectors that pull postings straight from company ATS boards and job APIs, cutting LinkedIn's share of intake from 99% to under half. Then audited the pipeline's own funnel data row by row: found marketing emails being logged as interviews and ~30% of rows as noise, and rebuilt the metrics around human-confirmed outcomes only.
         </p>
         <div class="project-stack">
           <span class="stack-tag">Google Apps Script</span>
