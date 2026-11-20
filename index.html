@@ -72,6 +72,31 @@
       -webkit-font-smoothing: antialiased;
     }
 
+    /* ── BACKGROUND: dot grid with a cursor spotlight (Rishi's pick, 20 Nov 2026) ──
+       Fixed behind everything, never catches the mouse. --i is the overall intensity (about 28%);
+       the spotlight is brighter at its centre and fades smoothly outwards. */
+    #bgfx { position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden;
+            --i: .28; --mx: 70vw; --my: 30vh; }
+    #bgfx > div { position: absolute; inset: 0; }
+    #bgfx .dots {
+      background-image: radial-gradient(circle, rgba(236,227,221,.20) 0 1px, rgba(236,227,221,0) 1.5px);
+      background-size: 32px 32px; background-position: 16px 16px;
+      opacity: calc(var(--i) * 0.6);
+    }
+    #bgfx .halo {
+      background: radial-gradient(circle 360px at var(--mx) var(--my),
+        rgba(205,108,117,.30) 0, rgba(205,108,117,.19) 22%, rgba(205,108,117,.09) 48%,
+        rgba(205,108,117,.03) 75%, rgba(205,108,117,0) 100%);
+    }
+    #bgfx .lit {
+      background-image: radial-gradient(circle, rgba(232,134,144,1) 0 1.5px, rgba(232,134,144,0) 2.6px);
+      background-size: 32px 32px; background-position: 16px 16px;
+      -webkit-mask-image: radial-gradient(circle 300px at var(--mx) var(--my),
+        #000 0, rgba(0,0,0,.82) 20%, rgba(0,0,0,.5) 45%, rgba(0,0,0,.2) 72%, rgba(0,0,0,0) 100%);
+              mask-image: radial-gradient(circle 300px at var(--mx) var(--my),
+        #000 0, rgba(0,0,0,.82) 20%, rgba(0,0,0,.5) 45%, rgba(0,0,0,.2) 72%, rgba(0,0,0,0) 100%);
+    }
+
     /* ── NAV ── */
     nav {
       position: fixed;
@@ -594,6 +619,8 @@
 </head>
 <body>
 
+  <div id="bgfx" aria-hidden="true"><div class="dots"></div><div class="halo"></div><div class="lit"></div></div>
+
   <!-- NAV -->
   <nav>
     <a href="#hero" class="nav-name">RK</a>
@@ -941,6 +968,43 @@
     }, { rootMargin: '-40% 0px -55% 0px' });
 
     sections.forEach(s => observer.observe(s));
+  </script>
+
+  <script>
+    /* Spotlight follower. Follows the pointer (mouse or finger drag); drifts slowly on its own when
+       nothing is moving. Still under prefers-reduced-motion. Updates only when the position changes. */
+    (function () {
+      var fx = document.getElementById('bgfx');
+      if (!fx) return;
+      var mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+      var s = { x: 0.72, y: 0.3, tx: 0.72, ty: 0.3, ptr: false, lastMove: 0, lx: -1, ly: -1 };
+      function apply() {
+        var px = Math.round(s.x * window.innerWidth), py = Math.round(s.y * window.innerHeight);
+        if (px === s.lx && py === s.ly) return;
+        s.lx = px; s.ly = py;
+        fx.style.setProperty('--mx', px + 'px'); fx.style.setProperty('--my', py + 'px');
+      }
+      apply();
+      if (mq.matches) return;
+      window.addEventListener('pointermove', function (e) {
+        s.tx = e.clientX / window.innerWidth; s.ty = e.clientY / window.innerHeight;
+        s.ptr = true; s.lastMove = performance.now();
+      }, { passive: true });
+      var prev = performance.now();
+      function tick(now) {
+        var dt = Math.min(0.1, (now - prev) / 1000); prev = now;
+        if (s.ptr && now - s.lastMove > 6000) s.ptr = false;   /* idle: go back to drifting */
+        if (!s.ptr) {
+          var t = now / 1000;
+          s.tx = 0.5 + 0.34 * Math.sin(t * 0.13); s.ty = 0.42 + 0.26 * Math.sin(t * 0.21 + 1.3);
+        }
+        var k = 1 - Math.pow(0.001, dt);
+        s.x += (s.tx - s.x) * k; s.y += (s.ty - s.y) * k;
+        apply();
+        requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    })();
   </script>
 
 </body>
