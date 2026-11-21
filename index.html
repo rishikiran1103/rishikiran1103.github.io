@@ -76,7 +76,28 @@
        Fixed behind everything, never catches the mouse. --i is the overall intensity (about 28%);
        the spotlight is brighter at its centre and fades smoothly outwards. */
     #bgfx { position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden;
-            --i: .28; --mx: 70vw; --my: 30vh; }
+            --i: .28; --mx: 70vw; --my: 30vh;
+            /* Calm the effect behind the text column (820px wide, centred) and bring it back smoothly
+               towards the margins, so there is no visible edge between content and empty space. */
+            --half: min(410px, 50vw); --fade: 200px; --floor: .12;
+            --m0: rgba(0,0,0,var(--floor));
+            --m1: rgba(0,0,0,calc(var(--floor) + (1 - var(--floor)) * .10));
+            --m2: rgba(0,0,0,calc(var(--floor) + (1 - var(--floor)) * .50));
+            --m3: rgba(0,0,0,calc(var(--floor) + (1 - var(--floor)) * .90));
+            -webkit-mask-image: linear-gradient(to right,
+              #000 0, #000 calc(50% - var(--half) - var(--fade)),
+              var(--m3) calc(50% - var(--half) - var(--fade) * .75), var(--m2) calc(50% - var(--half) - var(--fade) * .5),
+              var(--m1) calc(50% - var(--half) - var(--fade) * .25), var(--m0) calc(50% - var(--half)),
+              var(--m0) calc(50% + var(--half)),
+              var(--m1) calc(50% + var(--half) + var(--fade) * .25), var(--m2) calc(50% + var(--half) + var(--fade) * .5),
+              var(--m3) calc(50% + var(--half) + var(--fade) * .75), #000 calc(50% + var(--half) + var(--fade)), #000 100%);
+                    mask-image: linear-gradient(to right,
+              #000 0, #000 calc(50% - var(--half) - var(--fade)),
+              var(--m3) calc(50% - var(--half) - var(--fade) * .75), var(--m2) calc(50% - var(--half) - var(--fade) * .5),
+              var(--m1) calc(50% - var(--half) - var(--fade) * .25), var(--m0) calc(50% - var(--half)),
+              var(--m0) calc(50% + var(--half)),
+              var(--m1) calc(50% + var(--half) + var(--fade) * .25), var(--m2) calc(50% + var(--half) + var(--fade) * .5),
+              var(--m3) calc(50% + var(--half) + var(--fade) * .75), #000 calc(50% + var(--half) + var(--fade)), #000 100%); }
     #bgfx > div { position: absolute; inset: 0; }
     #bgfx .dots {
       background-image: radial-gradient(circle, rgba(236,227,221,.20) 0 1px, rgba(236,227,221,0) 1.5px);
